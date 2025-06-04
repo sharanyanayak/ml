@@ -12,6 +12,7 @@ data['horsepower'] = data['horsepower'].astype(float)
 
 X = data[['horsepower']]
 y = data['mpg']
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 poly = PolynomialFeatures(degree=2)
@@ -22,9 +23,9 @@ model = LinearRegression()
 model.fit(X_train_poly, y_train)
 y_pred = model.predict(X_test_poly)
 
+plt.scatter(X_test, y_test, color='green', label='Actual MPG', alpha=0.6)
 sorted_idx = X_test['horsepower'].argsort()
-plt.scatter(X_test, y_test, color='blue', alpha=0.6, label='Actual MPG')
-plt.plot(X_test.iloc[sorted_idx], y_pred[sorted_idx], color='red', label='Polynomial Fit')
+plt.plot(X_test.iloc[sorted_idx], y_pred[sorted_idx], color='orange', label='Polynomial Fit')
 plt.xlabel("Horsepower")
 plt.ylabel("MPG")
 plt.title("Polynomial Regression: Horsepower vs MPG")
